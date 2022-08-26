@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="PFVision.User_Controls.TracklistPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PFVision.User_Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <!-- Add single song -->
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" >
+                    <Label Name="UrlLabel" Foreground="#0767b3" Content="Song Url:" ></Label>
+                    <TextBox Margin="12,0,0,10" Foreground="#0767b3" Height="20" Width="300" Name="UrlBox"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <Label Name="TitleLabel" Foreground="#0767b3" Content="Song Title:" ></Label>
+                    <TextBox Margin="5,0,0,10" Foreground="#0767b3" Height="20" Width="300" Name="TitleBox"></TextBox>
+                </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Name="DurationLabel" Foreground="#0767b3" Content="Duration(s):" ></Label>
+                <TextBox Margin="0,0,0,10" Foreground="#0767b3" Height="20" Width="300" Name="DurationBox"></TextBox>
+            </StackPanel >
+            <Button Click="BtnSingleTrackAdd_Click" Margin="-220,10,0,10" Width="300" x:Name="BtnSingleTrackAdd" Foreground="#0767b3" Content="Add Single Track"></Button>
+            <Button Height="30" Width="300" Margin="-220,10,0,10" x:Name="BtnFileSearch" Click="BtnFileSearch_Click" Foreground="#0767b3" Content="Search File For Tracks"></Button>
+
+            <DataGrid AlternatingRowBackground="Black" FontSize="15" ItemsSource="{Binding Path=TrackFilesToAddList}" Foreground="#0767b3" IsReadOnly="True"  Name="TrackFilesToAddList" MinHeight="400" MaxHeight="400">
+            </DataGrid>
+            <Button Click="BtnAddAboveTracks_Click" Margin="0,0,0,0"  Foreground="#0767b3" Content="Add Above Tracks"></Button>
+        </StackPanel>
+
+
+       
+        <!-- Add accounts from list
+            <Button Margin="0,40,0,0"  Foreground="#0767b3" Content="Search File for Tracks"></Button>
+            <DataGrid AlternatingRowBackground="Black" FontSize="15" ItemsSource="{Binding Path=Trackfilelist}" Foreground="#0767b3" IsReadOnly="True"  Name="TrackFile" MinHeight="400" MaxHeight="400">
+            </DataGrid>
+        <Button Margin="0,0,0,0"  Foreground="#0767b3" Content="Add Above Tracks"></Button> -->
+     
+       
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <Label Margin="200,0,0,0" Foreground="#0767b3" Content="Full list of current Tracks" FontSize="25" ></Label>
+            <DataGrid Margin="10" AlternatingRowBackground="Black" FontSize="15" ItemsSource="{Binding Path=FullTrackList}" Foreground="#0767b3" IsReadOnly="True"  Name="FullTrackList" MinHeight="600" MaxHeight="600" ></DataGrid>
+        </StackPanel>
+
+        <Line Grid.ColumnSpan="2" Grid.RowSpan="2" X1="665" X2="665" Y1="0" Y2="666"  StrokeThickness="2" Stroke="DarkGray"></Line>
+    </Grid>
+</UserControl>

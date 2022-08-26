@@ -1,0 +1,64 @@
+﻿<mah:MetroWindow x:Class="PFVision.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Icons="Http:/metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:PFVision"
+        mc:Ignorable="d"
+        GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"                 
+        WindowState="Normal"
+                 
+        Title="PF Vision - Listen to the sound of Money">
+    <Grid ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" ></ColumnDefinition>
+
+
+
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <!-- Panel Borders   -->
+        <Line Grid.ColumnSpan="2" Grid.RowSpan="2" X1="100" X2="2000" Y1="50" Y2="50" Stroke="#0767b3" StrokeThickness="5">
+
+        </Line>
+        <Line Grid.ColumnSpan="2" Grid.RowSpan="2" X1="100" X2="100" Y1="50" Y2="1080" Stroke="#0767b3" StrokeThickness="5">
+
+        </Line>
+        <Line Grid.ColumnSpan="2" Grid.RowSpan="2" X1="100" X2="100" Y1="50" Y2="1080" Stroke="#0767b3" StrokeThickness="5">
+
+        </Line>
+        <Line Grid.ColumnSpan="2" Grid.RowSpan="2" X1="0" X2="100" Y1="0" Y2="50" Stroke="#0767b3" StrokeThickness="5">
+
+        </Line>
+
+        <!-- Sidepanel   -->
+        <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical">
+            <Button Click="BtnStart_Click"  x:Name="BtnStart" Background="#0767b3" Margin="0,50,0,10"  HorizontalContentAlignment="Left"  Content="Start Bot" Height="40" Width="Auto" Style="{DynamicResource MahApps.Styles.Button.MetroWindow.Dark}"></Button>
+            <Button Click="BtnAccOverview_Click"  x:Name="BtnAccOverview" Background="#0767b3" Margin="0,50,0,10" HorizontalContentAlignment="Left"  Content="Account Overview" Height="40" Width="Auto" Style="{DynamicResource MahApps.Styles.Button.MetroWindow.Dark}"></Button>
+            <Button Click="BtnTracklist_Click"  x:Name="BtnTracklist" Background="#0767b3" Margin="0,50,0,10"  HorizontalContentAlignment="Left"  Content="Tracklist"  Height="40" Width="Auto" Style="{DynamicResource MahApps.Styles.Button.MetroWindow.Dark}"></Button>
+            <Button Click="BtnGenerated_Click"  x:Name="BtnGenerated" Background="#0767b3" Margin="0,50,0,10"  HorizontalContentAlignment="Left"  Content="Generated" Height="40" Width="Auto" Style="{DynamicResource MahApps.Styles.Button.MetroWindow.Dark}"></Button>
+            <Button Click="BtnEarnings_Click"  x:Name="BtnEarnings" Background="#0767b3" Margin="0,50,0,10"  HorizontalContentAlignment="Left"  Content="Earnings" Height="40" Width="Auto" Style="{DynamicResource MahApps.Styles.Button.MetroWindow.Dark}"></Button>
+            
+            <!-- <Button Background="#0767b3" Margin="0,50,0,10"  HorizontalContentAlignment="Left"  Height="40" Width="Auto" Style="{DynamicResource MahApps.Styles.Button.MetroWindow.Dark}"></Button> -->
+            <!-- <Button Background="#0767b3" Margin="0,50,0,10"  HorizontalContentAlignment="Left"  Height="40" Width="Auto" Style="{DynamicResource MahApps.Styles.Button.MetroWindow.Dark}"></Button> -->
+
+        </StackPanel>
+
+        <!-- Tab Control   -->
+        <ScrollViewer Grid.Row="1" Grid.Column="2"  >
+            <TabControl x:Name="MainTab" Background="#252525">
+
+            </TabControl>
+        </ScrollViewer>
+
+    </Grid>
+</mah:MetroWindow>
