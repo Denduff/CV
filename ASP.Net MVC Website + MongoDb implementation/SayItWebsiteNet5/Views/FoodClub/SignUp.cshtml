@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "SignUp";
+}
+@if (User?.Identity.IsAuthenticated ?? false)
+{
+    <h1>SignUp</h1>
+
+    <a class="btn btn-primary" asp-action="PostSignUp" asp-controller="FoodClub"> Tilmeld dig Madklubben </a>
+
+
+}
+else
+{
+    <div>
+        <span>Log på for se siden</span>
+        <button type="button" onclick="location.href='@Url.Action("Login","Account")'"> Login</button>
+
+    </div>
+}
+
+

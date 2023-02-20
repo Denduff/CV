@@ -14,6 +14,9 @@ namespace SayItWebsiteNet5.Models
         [BsonId]
         public Guid _Id { get; set; }
         [Required]
+        
+        [DisplayName("Telefon")]
+        public string? Phone { get; set; }
         [DisplayName("Navn")]
         public string Name { get; set; }
         [DisplayName("Efternavn")]

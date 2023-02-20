@@ -1,0 +1,100 @@
+﻿@using SayItWebsiteNet5.Foodclub
+@model SayItWebsiteNet5.Foodclub.Menu
+
+@{
+    ViewData["Title"] = "CreateMenuItem";
+}
+
+
+<h4>Menu</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateMenuItem">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Link" class="control-label"></label>
+                <input asp-for="Link" class="form-control" />
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+            <input asp-for="Ingredients" value="@ingredients" type="hidden" />
+
+            <div class="form-group">
+                <input type="submit" value="Opret Madret" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <input value="@IngredientName" style="resize:none;" placeholder="Navn" />
+            <input value="@IngredientAmount" style="resize:none;" placeholder="Antal/Mængde" />
+            <input value="@IngredientPrice" style="resize:none;" placeholder="Pris" />
+            <button class="btn btn-primary" onclick="@addIngredient()">Tilføj Ingrediens</button>
+        </div>
+    </div>
+</div>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <p>Ingrediens</p>
+                </th>
+                <th>
+                    <p>Mængde</p>
+                </th>
+                <th>
+                    <p>Pris</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ingredients)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Amount
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+@functions {
+    public List<Ingredient> ingredients = new List<Ingredient>();
+    string IngredientName = "";
+    float IngredientAmount = 0;
+    float IngredientPrice = 0;
+    bool addIngredient()
+    {
+        ingredients.Add(new Ingredient(IngredientName, IngredientAmount, IngredientPrice));
+        return true;
+    }
+ 
+}
+

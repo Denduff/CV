@@ -16,8 +16,8 @@ namespace SayItWebsiteNet5.Controllers
         [HttpPost]
         public IActionResult SendEmail(Contact contact)
         {
-            string to = ""; //Redacted
-            string from = ""; //Redacted
+            string to = "nichothepotato@gmail.com";
+            string from = "Andreas.elbyhoej@live.dk";
 
             MailMessage message = new MailMessage(from, to);
             message.Subject = "Besked fra Say-It hjemmesiden";
@@ -25,7 +25,7 @@ namespace SayItWebsiteNet5.Controllers
             SmtpClient client = new SmtpClient("smtp-mail.outlook.com");
             client.Port = 25;
             client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("",""); //Redacted
+            client.Credentials = new NetworkCredential("Andreas.elbyhoej@live.dk","Salmonellafisk123");
             client.Send(message);
 
          

@@ -1,0 +1,81 @@
+﻿@model SayItWebsiteNet5.Data.ExcelData
+
+@{
+    ViewData["Title"] = "Hent fraværsuge";
+}
+
+<h1>Hent Fraværsuge</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateTable">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div>
+                    <label> Ugenummer </label>
+                    <input asp-for="@Model.WeekNumber" />
+                </div>
+                <br />
+                <input type="submit" value="Hent ugeskema" class="btn btn-primary" asp-action="CreateTable" asp-route-id="WeekNumber" />
+            </div>
+        </form>
+    </div>
+</div>
+<div id="Grid" runat="server">
+    @{
+        if (Model != null)
+        {
+            <table class="table" runat="server">
+                <thead>
+                    <tr>
+                        <th>Navn UgeNr : @Model.WeekNumber</th>
+                        <th>@Html.DisplayNameFor(model => model.Monday)</th>
+                        <th>@Html.DisplayNameFor(model => model.Tuesday)</th>
+                        <th>@Html.DisplayNameFor(model => model.Thursday)</th>
+                        <th>@Html.DisplayNameFor(model => model.Friday)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var key in Model.Data.Keys)
+                    {
+                        int indexPicker = Model.Data[key].IndexOf(Model.Data[key].Where(x => x.StudentData.Name != null).First());
+                       
+                        var name = Model.Data[key][indexPicker].StudentData.Name + " " + Model.Data[key][0].StudentData.Surname;
+                        <tr>
+                            <td>
+                                @name
+                            </td>
+                            @foreach (var value in Model.Data[key].Where(x => x != null))
+                            {
+                                var stuff = value.Present == true ? "v" : value.Note == null ? "%" : value.Note;
+                                <td>
+                                    <p>@stuff</p>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+</div>
+<form asp-action="Download" asp-controller="ExcelData" method="post">
+    <input type="hidden" name="GridHtml" />
+    <input type="submit" value="Download" class="btnSubmit" />
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $(".btnSubmit").click(function() {
+                $("input[name='GridHtml']").val($("#Grid").html());
+            });
+        });
+    </script>

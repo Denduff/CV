@@ -53,6 +53,7 @@
                     {
                         if (item.Participants.Any(x => x._Id.ToString() == _userManager.GetUserId(User)))
                         {
+                            <btn>Test</btn>
                             <a class="btn btn-primary" asp-action="UnSubscribeProject" asp-route-id="@item.Id">Afmeld</a>
                         }
                         else

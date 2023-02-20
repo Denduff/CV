@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SayItWebsiteNet5.Models.Protocol>
+﻿@model Protocol
 
 @{
     ViewData["Title"] = "DetailsProtocol";
@@ -6,10 +6,7 @@
 
 <h1>Protokol for </h1>
 <h2>
-    @foreach (var x in Model)
-    {
-        @x.Date.ToShortDateString()
-    }
+        @Model.Date.ToShortDateString()
 </h2>
 <div>
     <hr />
@@ -30,34 +27,33 @@
         </thead>
 
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var thing in Model.StudentProtocol)
             {
                 <tr>
-
-                
-                        @foreach (var thing in item.StudentProtocol)
+                    <td>
+                        @thing.Value.StudentData.Name
+                    </td>
+                    <td>
+                        @if (thing.Value.Note == null)
                         {
-                    <tr>
-                        <td>
-                                @thing.Value.StudentData.Name
-                        </td>
-                        <td>
-                                    @if (thing.Value.Note == null)
-                                    {
-                                <p> Ingen Note</p>
-                                    }
-                                    else
-                                    {
-                                <p>@thing.Value.Note</p>
-                                    }
-
-                        </td>
-                        <td>
-                                    @if(thing.Value.Present) {<p> Fremmødt</p>}
-                                    else { <p> Ikke fremmødt</p>}
-                        </td>
-                    </tr>
+                            <p> Ingen Note</p>
                         }
+                        else
+                        {
+                            <p>@thing.Value.Note</p>
+                        }
+
+                    </td>
+                    <td>
+                        @if (thing.Value.Present)
+                        {
+                            <p> Fremmødt</p>
+                        }
+                        else
+                        {
+                            <p> Ikke fremmødt</p>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>
@@ -65,11 +61,7 @@
 </div>
 
 <div>
-    <a style="margin-left:5px" asp-action="Index">Back to List</a>
-    @foreach(var x in Model)
-    {
-    <a style="margin-left:950px" asp-action="EditProtocol" asp-route-id="@x.Id">Ændre </a>
-    }
+    <a style="margin-left:5px" asp-action="Index">Back to List</a> <a asp-action="EditProtocol" asp-route-id="@Model.Id">Ændre </a>
 </div>
 
 

@@ -7,6 +7,7 @@ using SayItWebsiteNet5.Data;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SayItWebsiteNet5.Controllers
 {
@@ -54,7 +55,7 @@ namespace SayItWebsiteNet5.Controllers
 
         [HttpGet]
         [Route("Student/GetStudent/{userid}")]
-        public IActionResult GetStudent(Guid userid)
+        public async Task<IActionResult> GetStudent(Guid userid)
         {
 
             var student = _dbFactory.GetOneDocument<Student>("SayItWebsiteInfo", "Students", userid.ToString(), true);
@@ -62,6 +63,8 @@ namespace SayItWebsiteNet5.Controllers
             var relevantProtocols = protocols.Where(x => x.StudentProtocol.ContainsKey(userid.ToString()));
             List<ProtocolData> protocolsData = new List<ProtocolData>();
             List<DateTime> relevantDates = new List<DateTime>();
+            ApplicationUser User = await _userManager.FindByIdAsync(userid.ToString());
+            ViewBag.Username = User.UserName;
 
             foreach (Protocol protocol in relevantProtocols)
             {
@@ -91,7 +94,7 @@ namespace SayItWebsiteNet5.Controllers
                 {
                     label = $"{relevantDates[datecount].ToShortDateString()}",
                     y = attendance,
-                    tooltip = p.Note ?? "Ingen Note"
+                    tooltip = p.Note != null ? !p.Note.All(c => c == ' ') ? p.Note : "Ingen Note" : "Ingen Note"
                 };
 
                 dataPoints.Add(x);
@@ -106,6 +109,7 @@ namespace SayItWebsiteNet5.Controllers
             var projectCollection = _dbFactory.GetAllDocuments<Project>("SayItWebsiteInfo", "Projects");
             List<Project> MyProjects = projectCollection.Where(x => x.Owner._Id.ToString() == userid.ToString() && x.Active == true).ToList()
                                                      .Concat(projectCollection.Where(y => y.Participants.FirstOrDefault(s => s._Id.ToString() == userid.ToString()) != null && y.Active == true)).ToList();
+
 
             ViewBag.ProjectCollection = MyProjects;
 

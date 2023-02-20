@@ -28,10 +28,11 @@ namespace SayItWebsiteNet5.Controllers
             //add allEvents to viewbag then manage in view
             var allEvents = dBFactory.GetAllDocuments<SIEvents>("SayItWebsiteInfo", "Events");
             var currentEvents = from events in allEvents
-                                where events.Date.Date > DateTime.Now.Date
+                                where events.Date.Date > DateTime.Now.AddDays(-30)
                                 select events;
+            var sortedEvents = currentEvents.OrderByDescending(e => e.Date);
 
-            return View(currentEvents);
+            return View(sortedEvents);
         }
 
         public ActionResult Create()

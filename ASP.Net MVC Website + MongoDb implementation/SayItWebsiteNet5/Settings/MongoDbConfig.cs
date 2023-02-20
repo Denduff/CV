@@ -3,6 +3,6 @@
     public class MongoDbConfig
     {
         public string Name { get; set; }
-        public string ConnectionString = ""; //redacted
+        public string ConnectionString = ""; //redacted for sharing purposes
     }
 }

@@ -5,6 +5,7 @@ using SayItWebsiteNet5.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 
 namespace SayItWebsiteNet5.Controllers
 {
@@ -35,6 +36,7 @@ namespace SayItWebsiteNet5.Controllers
             protocol.Date = DateTime.Now;
 
             var collection = _dBFactory.GetAllDocuments<Student>("SayItWebsiteInfo", "Students").Where(x => x.Active == true);
+
             foreach (var element in collection)
             {
                 protocol.StudentProtocol.Add(element._Id.ToString(), new ProtocolData { Present = false, Note = "", StudentData = element });
@@ -49,10 +51,23 @@ namespace SayItWebsiteNet5.Controllers
             if (protocol.Date == DateTime.MinValue)
             {
                 protocol.Date = DateTime.Now;
+                protocol.WeekNumber = ISOWeek.GetWeekOfYear(protocol.Date);
             }
-      
+            if(protocol.WeekNumber == null)
+            {
+                protocol.WeekNumber = ISOWeek.GetWeekOfYear(protocol.Date);
+            }
+            foreach(var element in protocol.StudentProtocol)
+            {
+                if(element.Value.Note == null)
+                {
+                    element.Value.Note = "";
+                }
+            }
+            protocol.Date =  protocol.Date.AddHours(2);
 
             _dBFactory.CreateDocument("SayItWebsiteInfo", "Protocol", protocol);
+            
 
             ModelState.Clear();
             return RedirectToAction("Index");
@@ -79,16 +94,7 @@ namespace SayItWebsiteNet5.Controllers
         public IActionResult EditProtocol(Protocol protocol)
         {
             protocol.Id = ObjectId.Parse(protocol.SecretId);
-
-
-            if(!ModelState.IsValid)
-            {
-                throw new Exception();
-            }
-            var result =  _dBFactory.UpdateOneDocument<Protocol>("SayItWebsiteInfo", "Protocol", protocol);
-
-         
-
+            var result =  _dBFactory.UpdateOneDocument<Protocol>("SayItWebsiteInfo", "Protocol", protocol);    
             if (result.IsCompletedSuccessfully)
             {
           
@@ -116,7 +122,7 @@ namespace SayItWebsiteNet5.Controllers
 
 
             //route protocol id, replace current protocol
-            return View(protocol);
+            return View(protocol.FirstOrDefault());
         }
         [HttpGet]
         [Route("Protocol/DeleteProtocol/{ProtocolId}")]

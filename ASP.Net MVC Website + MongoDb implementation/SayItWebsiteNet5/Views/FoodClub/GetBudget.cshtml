@@ -1,0 +1,47 @@
+﻿@model SayItWebsiteNet5.Data.BudgetData
+
+@{
+    ViewData["Title"] = "GetBudget";
+}
+
+<h1>GetBudget</h1>
+
+<div>
+    <h4>BudgetData</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Food)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Food)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Entertainment)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Entertainment)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Activities)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Activities)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Creativity)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Creativity)
+        </dd>
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.EntriesLeft)
+        </dt>
+        <dd class ="col-sm-6">
+            @Html.DisplayFor(model => model.EntriesLeft)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-controller="Home" asp-action="Index">Tilbage</a>
+</div>

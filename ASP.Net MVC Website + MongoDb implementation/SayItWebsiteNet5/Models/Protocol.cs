@@ -14,6 +14,7 @@ namespace SayItWebsiteNet5.Models
     {
         [BsonId]
         public ObjectId Id { get; set; }
+        public int? WeekNumber { get; set; }
         public Dictionary<string, ProtocolData> StudentProtocol { get; set; }
         [DisplayName("Dato")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]

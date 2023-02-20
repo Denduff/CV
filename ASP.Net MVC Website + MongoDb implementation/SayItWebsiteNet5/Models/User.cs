@@ -24,6 +24,8 @@ namespace SayItWebsiteNet5.Models
         [Required]
         [Display(Name = "Efternavn")]        
         public string Surname { get; set; }
+        [Display(Name ="Telefon")]
+        public string Phone { get; set; }
         public DateTime EnrollmentCreated { get; set; }
         public int DaysTotal { get; set; }
         public int AbsentDaysTotal { get; set; }

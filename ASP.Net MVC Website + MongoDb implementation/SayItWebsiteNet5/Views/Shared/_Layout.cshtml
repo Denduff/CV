@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -39,47 +40,74 @@
 
             </div>
             <div>
+                <a asp-controller="Foodclub" asp-action="Index">Madklub</a>
+            </div>
+            <div>
                 <a asp-controller="Contact" asp-action="Index">Kontakt</a>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
 
+            <br />
+            <br />
+            <br />
+            <br />
+            @{
+                if (User?.Identity.IsAuthenticated ?? false)
+                {
+                    if (User.IsInRole("FoodClubAdmin"))
+                    {
+                        <p style="margin-left:10px;">Madklub Admin Menu</p>
+
+                        <button class="dropdown-btn">
+                            Klub Aften
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdowncontainer">
+                            <a asp-controller="FoodClub" asp-action="CreateClubNight">Opret Aften</a>
+                            <a asp-controller="FoodClub" asp-action="CreateMenuItem">Tilføj Madret</a>
+                            <a asp-controller="FoodClub" asp-action="DownloadClubNights">Download oversigt</a>
+                            <a asp-controller="FoodClub" asp-action="GetBudget">Budget Oversigt</a>
+                        </div>
+                        <br />
+                        <br />
+
+                    }
+                }
+            }
             @{
                 if (User?.Identity.IsAuthenticated ?? false)
                 {
                     if (User.IsInRole("Admin"))
                     {
-                            <p style="margin-left:10px;">Admin Menu</p>
+                        <p style="margin-left:10px;">Admin Menu</p>
 
-                            <button class="dropdown-btn">
-                                Elever
-                                <i class="fa fa-caret-down"></i>
-                            </button>
-                            <div class="dropdowncontainer">
-                                <a asp-controller="Student" asp-action="Index">Alle Elever</a>
-                                <a asp-controller="Student" asp-action="ActiveStudents">Aktive Elever</a>
-                                <a asp-controller="User" asp-action="Create">Opret Elev</a>
-                            </div>
+                        <button class="dropdown-btn">
+                            Elever
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdowncontainer">
+                            <a asp-controller="Student" asp-action="Index">Alle Elever</a>
+                            <a asp-controller="Student" asp-action="ActiveStudents">Aktive Elever</a>
+                            <a asp-controller="User" asp-action="Create">Opret Elev</a>
+                        </div>
 
-                            <button class="dropdown-btn">
-                                Protokol
-                                <i class="fa fa-caret-down"></i>
-                            </button>
-                            <div class="dropdowncontainer">
-                                <a asp-controller="Protocol" asp-action="Index">Liste af protokolerne</a>
-                                <a asp-controller="Protocol" asp-action="TakeProtocol">Tag Protokol</a>
-                            </div>
+                        <button class="dropdown-btn">
+                            Protokol
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdowncontainer">
+                            <a asp-controller="Protocol" asp-action="Index">Liste af protokolerne</a>
+                            <a asp-controller="Protocol" asp-action="TakeProtocol">Tag Protokol</a>
+                            <a asp-controller="ExcelData" asp-action="CreateTable">Uge Skema</a>
+                        </div>
 
-                            <button class="dropdown-btn">
-                                Admin ting
-                                <i class="fa fa-caret-down"></i>
-                            </button>
-                            <div class="dropdowncontainer">
+                        <button class="dropdown-btn">
+                            Admin ting
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdowncontainer">
 
-                                <a asp-controller="User" asp-action="CreateRole">Opret Rolle</a>
-                            </div>
+                            <a asp-controller="User" asp-action="CreateRole">Opret Rolle</a>
+                        </div>
 
                     }
                 }
@@ -88,12 +116,12 @@
 
             @if (User?.Identity.IsAuthenticated ?? false)
             {
+
                 <div class="bruger">
-                    <p style="margin-left:10px;"> Bruger: @User.Identity.Name</p>
-
-
-
-                    <p></p>
+                    @{
+                        string btnText = "Bruger: " + User.Identity.Name;
+                    }
+                    <a asp-controller="User" asp-action="GetUser" asp-route-id="@User.FindFirstValue(ClaimTypes.NameIdentifier)">@btnText</a>
                     <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Log Ud</a>
                 </div>
             }

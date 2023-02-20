@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Duff\\Desktop\\CV\\ASP.Net MVC Website + MongoDb implementation\\SayItWebsiteNet5\\SayItWebsiteNet5.csproj": {}
+    "C:\\Users\\andre\\Desktop\\CV\\ASP.Net MVC Website + MongoDb implementation\\SayItWebsiteNet5\\SayItWebsiteNet5.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Duff\\Desktop\\CV\\ASP.Net MVC Website + MongoDb implementation\\SayItWebsiteNet5\\SayItWebsiteNet5.csproj": {
+    "C:\\Users\\andre\\Desktop\\CV\\ASP.Net MVC Website + MongoDb implementation\\SayItWebsiteNet5\\SayItWebsiteNet5.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Duff\\Desktop\\CV\\ASP.Net MVC Website + MongoDb implementation\\SayItWebsiteNet5\\SayItWebsiteNet5.csproj",
+        "projectUniqueName": "C:\\Users\\andre\\Desktop\\CV\\ASP.Net MVC Website + MongoDb implementation\\SayItWebsiteNet5\\SayItWebsiteNet5.csproj",
         "projectName": "SayItWebsiteNet5",
-        "projectPath": "C:\\Users\\Duff\\Desktop\\CV\\ASP.Net MVC Website + MongoDb implementation\\SayItWebsiteNet5\\SayItWebsiteNet5.csproj",
-        "packagesPath": "C:\\Users\\Duff\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Duff\\Desktop\\CV\\ASP.Net MVC Website + MongoDb implementation\\SayItWebsiteNet5\\obj\\",
+        "projectPath": "C:\\Users\\andre\\Desktop\\CV\\ASP.Net MVC Website + MongoDb implementation\\SayItWebsiteNet5\\SayItWebsiteNet5.csproj",
+        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\andre\\Desktop\\CV\\ASP.Net MVC Website + MongoDb implementation\\SayItWebsiteNet5\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Duff\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -64,6 +64,10 @@
               "target": "Package",
               "version": "[2.14.1, )"
             },
+            "ServiceStack.Text": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
             "System-Web-Helpers.dll": {
               "target": "Package",
               "version": "[1.0.0, )"
@@ -75,7 +79,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -87,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

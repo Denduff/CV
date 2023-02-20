@@ -8,6 +8,7 @@
           <label class="control-label">@Model.Date.ToShortDateString()</label>
           <input type="hidden" asp-for="@Model.Date" value="@Model.Date" >    
           <input type="hidden" asp-for="@Model.SecretId" value="@Model.SecretId" >
+          <input type="hidden" asp-for="@Model.WeekNumber" value="@Model.WeekNumber">
 @foreach(var item in Model.StudentProtocol)
 {
         
@@ -29,6 +30,8 @@
         <input type="hidden" asp-for="@Model.StudentProtocol[item.Key].StudentData.Active" value="@item.Value.StudentData.Active">
         <input type="hidden" asp-for="@Model.StudentProtocol[item.Key].StudentData.ActiveEvents" value="@item.Value.StudentData.ActiveEvents">
         <input type="hidden" asp-for="@Model.StudentProtocol[item.Key].StudentData._Id" value="@item.Value.StudentData._Id">
+        <input type="hidden" asp-for="@Model.StudentProtocol[item.Key].StudentData.Phone" value="@item.Value.StudentData.Phone">
+       
      
     </div>
 }

@@ -138,7 +138,7 @@ namespace SayItWebsiteNet5.Data
 
         }
 
-       
+        //delete document
         public bool DeleteDocument<T>(string dbname, string collection, T obj)
         {
             Db = _MongoClient.GetDatabase(dbname);
@@ -157,6 +157,10 @@ namespace SayItWebsiteNet5.Data
 
         }
 
+        internal void GetAllDocuments<T>()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

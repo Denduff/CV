@@ -1,0 +1,72 @@
+﻿@model SayItWebsiteNet5.Foodclub.ClubNight
+
+@{
+    ViewData["Title"] = "CreateClubNight";
+}
+
+<h1>CreateClubNight</h1>
+
+<h4>ClubNight</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PostClubNight">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Budget.Day" class="control-label"></label>
+                <input asp-for="Budget.Day" class="form-control" />
+                <span asp-validation-for="Budget.Day" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Budget.Food" class="control-label"></label>
+                <input asp-for="Budget.Food" class="form-control" />
+                <span asp-validation-for="Budget.Food" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Budget.Activities" class="control-label"></label>
+                <input asp-for="Budget.Activities" class="form-control" />
+                <span asp-validation-for="Budget.Activities" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Budget.Entertainment" class="control-label"></label>
+                <input asp-for="Budget.Entertainment" class="form-control" />
+                <span asp-validation-for="Budget.Entertainment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Budget.Creativity" class="control-label"></label>
+                <input asp-for="Budget.Creativity" class="form-control" />
+                <span asp-validation-for="Budget.Creativity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuOfDay.Name" class="control-label"></label>
+                <input asp-for="MenuOfDay.Name" class="form-control" />
+                <span asp-validation-for="MenuOfDay.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuOfDay.Link" class="control-label"></label>
+                <input asp-for="MenuOfDay.Link" class="form-control" />
+                <span asp-validation-for="MenuOfDay.Link" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuOfDay.Description" class="control-label"></label>
+                <input asp-for="MenuOfDay.Description" class="form-control" />
+                <span asp-validation-for="MenuOfDay.Description" class="text-danger"></span>
+            </div>
+
+             <input type="hidden" asp-for="Participants" value="null">
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

@@ -5,6 +5,7 @@ using SayItWebsiteNet5.Models;
 using SayItWebsiteNet5.Data;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SayItWebsiteNet5.Controllers
 {
@@ -12,12 +13,14 @@ namespace SayItWebsiteNet5.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private RoleManager<ApplicationRole> _roleManager;
+        private DBFactory dBFactory;
 
 
         public UserController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             this._userManager = userManager;
             _roleManager = roleManager;
+            dBFactory = new DBFactory();
         }
         public IActionResult Create()
         {
@@ -63,6 +66,11 @@ namespace SayItWebsiteNet5.Controllers
                     student._Id = appUser.Id;
                     student.Name = user.Name;
                     student.Surname = user.Surname;
+                    student.Phone = user.Phone;
+                    if(student.Phone == null)
+                    {
+                        student.Phone = "";
+                    }
                     student.EnrollmentCreated = System.DateTime.Now;
                     student.DaysTotal = 0;
                     student.AbsentDaysTotal = 0;
@@ -73,7 +81,7 @@ namespace SayItWebsiteNet5.Controllers
 
 
                     //add to student table in db
-                    DBFactory dBFactory = new DBFactory();
+              
                     dBFactory.CreateDocument<Student>("SayItWebsiteInfo", "Students", student);
 
 
@@ -112,8 +120,50 @@ namespace SayItWebsiteNet5.Controllers
             return View();
 
         }
+        [HttpGet]
+        [Route("User/GetUser/{Id}")]
+        public async Task<IActionResult> GetUser(string Id)
+        {
 
-        //[HttpPost]
-        //public async Task<>
+            var User = await _userManager.FindByIdAsync(Id);
+            ViewBag.Usn =  User.UserName;
+            ViewBag.Id = Id;
+            ViewBag.Roles = _roleManager.Roles;
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(UserData user)
+        {
+      
+            ApplicationUser idenUser = await _userManager.FindByIdAsync(user.Id);
+            Student student = dBFactory.GetOneDocument<Student>("SayItWebsiteInfo", "Students", idenUser.Id.ToString(), true);
+
+            if (HttpContext.Request.Form["RoleToAdd"] != string.Empty)
+            {
+                await _userManager.AddToRoleAsync(idenUser, HttpContext.Request.Form["RoleToAdd"]);
+            }
+            if (user.Password != null)
+            {
+                string resetToken = await _userManager.GeneratePasswordResetTokenAsync(idenUser);
+                await _userManager.ResetPasswordAsync(idenUser, resetToken, user.Password);
+            }
+            if (user.Phone != null)
+            {
+                await _userManager.SetPhoneNumberAsync(idenUser, user.Phone);
+                student.Phone = user.Phone;
+                await dBFactory.UpdateOneDocument("SayItWebsiteInfo", "Students", student);
+
+
+            }
+            if (user.Email != null)
+            {
+                await _userManager.SetEmailAsync(idenUser, user.Email);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

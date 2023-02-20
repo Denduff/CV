@@ -1,0 +1,117 @@
+﻿@model SayItWebsiteNet5.Foodclub.ClubNight
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (User?.Identity.IsAuthenticated ?? false)
+{
+    if (Model.MenuOfDay.Name == "Der er ingen aften oprettet endnu")
+    {
+        <h1>Næste Klub Aften</h1>
+
+        <div>
+            <div>
+                Menu: @Model.MenuOfDay.Name
+            </div>
+            <div>
+                Dato: @Model.Budget.Day
+            </div>
+            <div>
+                Beskrivelse: @Model.MenuOfDay.Description
+            </div>
+            <div>
+                <a href="@Model.MenuOfDay.Link"> Opskrift</a>
+            </div>
+            <div>
+                <span>@ViewBag.Message</span>
+                
+            </div>
+        </div>
+        <hr />
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <p>Deltagere</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var participant in Model.Participants.ParticipantList)
+                    {
+                        <tr>
+                            <td>
+                                @participant.Name @participant.Surname
+                                
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <h1>Næste Klub Aften</h1>
+        if (User.IsInRole("FoodClubAdmin") || User.IsInRole("Admin"))
+        {
+            <div>
+                <a class="btn btn-primary" asp-action="DeleteNight" asp-controller="FoodClub" asp-route-id="@Model.Id.ToString()">Slet klubaften</a>
+            </div>
+        }
+        <div>
+            <div>
+                Menu: @Model.MenuOfDay.Name
+            </div>
+            <div>
+                Dato: @Model.Budget.Day
+            </div>
+            <div>
+                Beskrivelse: @Model.MenuOfDay.Description
+            </div>
+            <div>
+                <a href="@Model.MenuOfDay.Link"> Opskrift</a>
+            </div>
+            <div>
+                <span>@ViewBag.Message</span>
+                <a class="btn btn-primary" asp-action="SubscribeToNight" asp-controller="FoodClub" asp-route-id="@Model.Id.ToString()">Tilmed</a>
+            </div>
+        </div>
+        <hr />
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <p>Deltagere</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var participant in Model.Participants.ParticipantList)
+                    {
+                        <tr>
+                            <td>
+                                @participant.Name @participant.Surname
+                                <a class="btn btn-primary" asp-action="UnsubscribeToNight" asp-controller="FoodClub" asp-route="@Model.Id.ToString()">Afmeld</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    
+
+}
+else
+{
+    <div>
+        <span>Log på for se siden</span>
+        <button type="button" onclick="location.href='@Url.Action("Login","Account")'"> Login</button>
+
+    </div>
+}
+
+

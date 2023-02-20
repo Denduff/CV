@@ -28,7 +28,7 @@ namespace SayItWebsiteNet5.Controllers
             //add to viewbag
 
             var currentEvents = from events in eventlist
-                                 where events.Date.Date > DateTime.Now.Date
+                                where events.Date.Date > DateTime.Now.AddDays(-30)
                                  select events;
 
             List<object> calenderList = new List<object>();
